@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <title>mobMess</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+<link href="//vjs.zencdn.net/5.11/video-js.min.css" rel="stylesheet">
+<script src="//vjs.zencdn.net/5.11/video.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="/style.css" rel="stylesheet">
+  </head>
+
+<style type="text/css">
+    html,body {height:100%}
+.FllScr {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 6px;
+  position: center;
+  font-family: 'Consolas';
+  font-size: 20px;
+}
+#request{
+position: absolute;
+    left: 5%;
+	top: 5%;
+}
+#exit{
+position: absolute;
+    top: 90%;
+	left: 80%;
+}
+#hide{
+display: none;
+}
+#input{
+-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 6px;
+font-family: 'Consolas';
+  font-size: 20px;
+  max-width:50%;
+  position: absolute;
+    left: 5%;
+	top: 90%;
+
+}
+#m{
+-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 6px;
+font-family: 'Consolas';
+  font-size: 20px;
+
+  position: absolute;
+    left: 5%;
+	top: 70%;
+	background-color:lightgrey;}
+.id{
+color: red;
+border-style: dotted;
+font-family: 'Consolas';
+  font-size: 20px;
+  position: absolute;
+    left: 70%;
+    top: 02%;}
+       .starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+table{
+   border: none;
+   border-bottom: 0px solid #fff
+    padding: :0;
+    position: absolute; top: 0; bottom: 0; left: 0; right: 0;
+    margin-bottom: 0%;
+  text-align: center;
+    height:100%;
+min-height:100%;
+    width:100%;
+}
+th, td{
+  border: collapse;
+  padding: 0;
+  border:none !important;
+}
+html>body table {height:100%}
+</style>
+<body id='container'>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td id='c0'></td>
+                <td id='c1'></td>
+                <td id='c2'></td>
+				        <td id='c3'></td>
+				        <td id='c4'></td>
+              </tr>
+              <tr>
+                <td id='c5'></td>
+                <td id='c6'></td>
+                <td id='c7'></td>
+				        <td id='c8'></td>
+				        <td id='c9'></td>
+              </tr>
+              <tr>
+                <td id='c10'></td>
+                <td id='c11'></td>
+                <td id='c12'></td>
+				        <td id='c13'></td>
+				        <td id='c14'></td>
+              </tr>
+              <tr>
+                <td id='c15'></td>
+                <td id='c16'></td>
+                <td id='c17'></td>
+				        <td id='c18'></td>
+				        <td id='c19'></td>
+              </tr>
+              <tr>
+                <td id='c20'></td>
+                <td id='c21'></td>
+                <td id='c22'></td>
+				        <td id='c23'></td>
+				        <td id='c24'></td>
+              </tr>
+			          <tr>
+                <td id='c25'></td>
+                <td id='c26'></td>
+                <td id='c27'></td>
+				        <td id='c28'></td>
+				        <td id='c29'></td>
+              </tr>
+			            <tr>
+                <td id='c30'></td>
+                <td id='c31'></td>
+                <td id='c32'></td>
+				        <td id='c33'></td>
+				        <td id='c34'></td>
+              </tr>
+            </tbody>
+          </table>
+	<button id="request" class="FllScr">Fullscreen</button>
+	<button id="exit" class="FllScr">Exit</button>
+	<!--<ul id="messages"></ul>-->
+    <!--<form action="" >
+      <input id="m" autocomplete="off" placeholder="Type your message here"/><button id= "input">Send</button>
+    </form>-->
+	<h1 id="reference"class ="id">id:{{id}}</h1>
+	<script>
+      var pixelid = {{id}}
+    </script>
+    <script src="/bower_components/jquery/dist/jquery.min.js" ></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/mobile.js"></script>
+	<script src="/screenfull.js"></script>
+	<script src="/NoSleep.js"></script>
+  <script type="text/javascript">
+  var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+        var elem = document.getElementById("container");
+  if((navigator.userAgent.match(/iPhone/i)) ||
+   (navigator.userAgent.match(/iPod/i))) {
+    if (is_safari){
+      elem.onclick = function() {
+          req = elem.requestFullScreen || elem.webkitRequestFullScreen || elem.mozRequestFullScreen;
+          req.call(elem);
+      }
+      }
+   }
+   $(document).keyup(function(e) {
+       if (e.keyCode == 27) { // escape key maps to keycode `27`
+   elem.webkitExitFullScreen();
+      }
+  });
+   </script>
+	<script>
+		$(function () {
+
+			$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+
+      var noSleep = new NoSleep();
+      noSleep.enable();
+
+      $('#request').click(function () {
+        noSleep.enable();
+      });
+   $('#exit').click(function () {
+     noSleep.disable();
+   });
+			if (!screenfull.enabled) {
+				return false;
+			}
+			$('#request').click(function () {
+				screenfull.request($('container')[0]);
+				// Does not require jQuery. Can be used like this too:
+				// screenfull.request(document.getElementById('container'));
+			});
+
+			$('#exit').click(function () {
+				screenfull.exit();
+			});
+			function fullscreenchange() {
+				var elem = screenfull.element;
+				$('#status').text('Is fullscreen: ' + screenfull.isFullscreen);
+
+				if (elem) {
+					$('#element').text('Element: ' + elem.localName + (elem.id ? '#' + elem.id : ''));
+				}
+
+				if (!screenfull.isFullscreen) {
+					$('#external-iframe').remove();
+					document.body.style.overflow = 'auto';
+				}
+			}
+			screenfull.onchange(fullscreenchange);
+			// Set the initial values
+			fullscreenchange();
+		});
+		 </script>
+  </body>
+</html>
