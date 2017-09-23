@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -171,7 +172,7 @@ html>body table {height:100%}
    (navigator.userAgent.match(/iPod/i))) {
     if (is_safari){
       elem.onclick = function() {
-          req = elem.requestFullScreen || elem.webkitRequestFullScreen || elem.mozRequestFullScreen;
+          req = elem.requestFullScreen || elem.webkitRequestFullScreen || elem.mozRequestFullScreen;0
           req.call(elem);
       }
       }

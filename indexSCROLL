@@ -1,0 +1,548 @@
+express = require('express')
+var app = express()
+var http = require('http').Server(app)
+var io = require('socket.io')(http)
+var os = require('os')
+var Queue = require('buffered-queue');
+var fs = require('fs')
+var qr = require('qr-image');
+
+function file(name) {
+  return fs.createWriteStream(__dirname + '/' + name);
+}
+//
+
+var font = {
+  ' ': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  'a': [1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+  'b': [0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+  'c': [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+  'd': [0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+  'e': [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+  'f': [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+  'g': [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+  'h': [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+  'i': [0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0],
+  'j': [0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1],
+  'k': [0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0],
+  'l': [0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+  'm': [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+  'n': [0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0],
+  'o': [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+  'p': [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+  'r': [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0],
+  's': [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+  't': [0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
+  'x': [0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0],
+  'v': [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1],
+  'w': [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1],
+  'y': [0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1],
+  'z': [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+  '!': [1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+  '?': [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1]
+}
+
+var pixels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+var address
+
+var port = 3000
+//socket to panel and to mobile devices
+var panelsock = io.of('/panel')
+var mobilesock = io.of('/mobile')
+
+//template engine using mustache
+var cons = require('consolidate')
+
+// assign the mustache engine to .html files
+app.engine('html', cons.mustache);
+// set .html as the default extension
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+//allow access to public folder
+app.use(express.static('public'))
+
+
+//endpoint for new message
+app.get('/msg/:msg', function(req, res) {
+  msgQueue(req.params.msg);
+  res.send('ok');
+})
+
+app.get('/panel', function(req, res) {
+  //list interfaces
+  var ifaces = os.networkInterfaces();
+  address = 'no address'
+  for (var ifname in ifaces) {
+    iface = ifaces[ifname]
+    for (var i = 0; i < iface.length; i++) {
+      var ifaddr = iface[i]['address']
+      direcIp = iface[i]['address'];
+      //filter ipv6 and localhost addresses
+      if (ifaddr.indexOf('.') != -1 && ifaddr.substr(0, 3) != '127') {
+        address = ifaddr
+
+
+      }
+    }
+  }
+  //qr.image("http://"+address+":"+port+"/", { type: 'svg', parse_url: true }).pipe(file('/public/qrAddr.svg'));
+
+  res.render('panel', {
+    address: address + ":" + port
+  })
+})
+
+app.get('/', function(req, res) {
+  //if no mobile is specified connect to a empty pixel
+  for (var pixelid = 0; pixelid < 35; pixelid++) {
+    var room = mobilesock.adapter.rooms[pixelid]
+    if (!room) {
+      res.redirect('/mobile/' + pixelid)
+    }
+  }
+})
+
+app.get('/mobile/:id', function(req, res) {
+  //if id is > 15 redirect
+  //http://stackoverflow.com/a/11355430/2205297
+  if (!req.params.id) {
+    for (var pixelid = 0; pixelid < 35; pixelid++) {
+      var room = mobilesock.adapter.rooms[pixelid]
+      if (!room) {
+        res.redirect('/mobile/' + pixelid)
+      }
+    }
+  }
+  //render template
+  res.render('mobile', {
+    id: req.params.id
+  })
+})
+
+/* panel connection */
+panelsock.on('connection', function(socket) {
+
+  console.log('a user connected to panel: ' + socket.id)
+  //send pixel data
+  socket.emit('pixels', pixels)
+  //send connection data
+  connCount()
+  socket.on('disconnect', function() {
+    console.log('user disconnected from panel: ' + socket.id)
+  })
+  //updates all bg of all the mobile devices
+  socket.on('pixels', function(_pixels) {
+    pixels = _pixels
+    console.log(pixels)
+    //update rest of panels
+    socket.broadcast.emit('pixels', pixels)
+    //update devices
+    devicesUpdate()
+  })
+
+})
+var phones;
+var confirm = 0;
+/* mobile connection */
+mobilesock.on('connection', function(socket) {
+
+  var pixelid = null
+
+  //informs which pixelid is assoc to the device
+  socket.on('pixel', function(_pixelid) {
+    pixelid = _pixelid
+    console.log('a mobile connected: ' + socket.id + " pixel:" + pixelid)
+    socket.join(pixelid)
+    //count connections
+    connCount()
+    //send the color of the pixel
+    var color = pixels[pixelid] ? 'black' : 'white'
+    socket.emit('c0', {
+      hello: 'world'
+    })
+  })
+  /*socket.on('ok', function(ok) {
+    confirm++
+
+
+    if(confirm>=phones){
+      flag = ok
+      console.log(confirm+"ok");
+      confirm = 0
+      }
+  })*/
+  //send to all panel connections
+  socket.on('disconnect', function() {
+    console.log('mobile disconnect: ' + socket.id)
+    connCount()
+
+  })
+
+})
+
+//counts connections for every pixel/room and sends it to panels
+function connCount() {
+  var connCount = []
+  for (var pixelid = 0; pixelid < 35; pixelid++) {
+    connCount.push(null)
+    var room = mobilesock.adapter.rooms[pixelid]
+    if (room) {
+      phones = pixelid
+      connCount[pixelid] = room.length
+    } else {
+      connCount[pixelid] = 0
+    }
+  }
+  panelsock.emit('connCount', connCount)
+
+}
+
+//convert str formed by 0 and 1 to bit aray
+function str2arr(str) {
+  var bits = []
+  for (var i = 0; i < str.length; i++) {
+    var bit = (str[i] == '0') ? 0 : 1
+    bits.push(bit)
+  }
+  return bits
+}
+//displays letter in devices, is possible update pixels value
+function devicesUpdate(_pixels) {
+
+  if (_pixels) {
+    pixels = _pixels
+  }
+
+  for (var pixelid = 0; pixelid < 35; pixelid++) {
+    var room = mobilesock.adapter.rooms[pixelid]
+    if (room) {
+      var color = pixels[pixelid] ? 'black' : 'white'
+
+      mobilesock.to(pixelid).emit('bg', color)
+    }
+  }
+}
+
+//global var hold timeoutHandler so it displayMessage can be cleared and stopped
+//if a new message arrives
+var displayHandler = null
+
+function msgQueue(msg) {
+  msg.length = msg.length || 2000;
+  var q = new Queue('msgBuffer', {
+    size: 1,
+    flushTimeout: 0,
+    verbose: false,
+    customResultFunction: function(items) {
+      var temp = [];
+      items.forEach(function(item, index, array) {
+
+        temp.push(item.toLowerCase());
+      });
+      return temp.join('\n');
+    }
+  });
+  if (displayHandler === null) {
+    console.log("NEW FLUSH")
+    q.on("flush", function(data, name) {
+      console.log(data);
+      alter(data);
+
+      setTimeout(function() {
+
+
+      }, (0));
+    });
+  }
+  q.add(msg);
+}
+
+
+function alter(data) {
+
+
+  console.log("alter:" + data);
+
+  console.log(phones);
+  if (phones > 10) {
+
+    var Scroller = (function(data) {
+        var scroll = {},
+          led = [],
+          message = [],
+          messageOffset,
+          emptyLetters = 0,
+          letterSpaces;
+        var mob = [];
+        for (pixelid = -1; pixelid < 35; pixelid++) {
+          var room = mobilesock.adapter.rooms[pixelid]
+          if (room) { //   ids moviles conectados
+            mob.push(pixelid);
+          }
+        }
+        scroll._messageQueue = [];
+
+        (function() {
+          // Lovingly borrowed from http://one.idontsmoke.co.uk/x/text/
+          // bitch stands for 'Basic Intergers and Typographic Characters displayed Horizontally'
+          var bitch = new Array();
+          bitch['a'] = ["00000", "00000", "01110", "00001", "01111", "10001", "01111"];
+          bitch['b'] = ["10000", "10000", "11110", "10001", "10001", "10001", "11110"];
+          bitch['c'] = ["00000", "00000", "01111", "10000", "10000", "10000", "01111"];
+          bitch['d'] = ["00001", "00001", "01111", "10001", "10001", "10001", "01111"];
+          bitch['e'] = ["00000", "00000", "01110", "10001", "11110", "10000", "01111"];
+          bitch['f'] = ["00111", "00100", "11110", "01000", "01000", "01000", "01000"];
+          bitch['g'] = ["00000", "00000", "01111", "10001", "01111", "00001", "01110"];
+          bitch['h'] = ["10000", "10000", "10110", "11001", "10001", "10001", "10001"];
+          bitch['i'] = ["01100", "00000", "01100", "00100", "00100", "00100", "01110"];
+          bitch['j'] = ["00110", "00000", "00110", "00010", "00010", "10010", "01100"];
+          bitch['k'] = ["10000", "10000", "10010", "10100", "11000", "10100", "10010"];
+          bitch['l'] = ["01100", "00100", "00100", "00100", "00100", "00100", "01110"];
+          bitch['m'] = ["00000", "00000", "11010", "10101", "10101", "10101", "10101"];
+          bitch['n'] = ["00000", "00000", "10110", "11001", "10001", "10001", "10001"];
+          bitch['o'] = ["00000", "00000", "01110", "10001", "10001", "10001", "01110"];
+          bitch['p'] = ["00000", "00000", "11110", "10001", "10001", "11110", "10000"];
+          bitch['q'] = ["00000", "00000", "01111", "10001", "10001", "01111", "00001"];
+          bitch['r'] = ["00000", "00000", "10111", "11000", "10000", "10000", "10000"];
+          bitch['s'] = ["00000", "00000", "01111", "10000", "01110", "00001", "11110"];
+          bitch['t'] = ["00100", "00100", "01111", "00100", "00100", "00100", "00011"];
+          bitch['u'] = ["00000", "00000", "10001", "10001", "10001", "10011", "01101"];
+          bitch['v'] = ["00000", "00000", "10001", "10001", "01010", "01010", "00100"];
+          bitch['w'] = ["00000", "00000", "10001", "10101", "10101", "11011", "10001"];
+          bitch['x'] = ["00000", "00000", "10001", "01010", "00100", "01010", "10001"];
+          bitch['y'] = ["00000", "00000", "10001", "10001", "01111", "00001", "01110"];
+          bitch['z'] = ["00000", "00000", "11111", "00010", "00100", "01000", "11111"];
+          bitch['A'] = ["01110", "10001", "10001", "10001", "11111", "10001", "10001"];
+          bitch['B'] = ["11110", "10001", "10001", "11110", "10001", "10001", "11110"];
+          bitch['C'] = ["01110", "10001", "10000", "10000", "10000", "10001", "01110"];
+          bitch['D'] = ["11110", "10001", "10001", "10001", "10001", "10001", "11110"];
+          bitch['E'] = ["11111", "10000", "10000", "11110", "10000", "10000", "11111"];
+          bitch['F'] = ["11111", "10000", "10000", "11110", "10000", "10000", "10000"];
+          bitch['G'] = ["01110", "10001", "10000", "10011", "10001", "10001", "01110"];
+          bitch['H'] = ["10001", "10001", "10001", "11111", "10001", "10001", "10001"];
+          bitch['I'] = ["01110", "00100", "00100", "00100", "00100", "00100", "01110"];
+          bitch['J'] = ["00111", "00010", "00010", "00010", "00010", "10010", "01100"];
+          bitch['K'] = ["10001", "10010", "10100", "11000", "10100", "10010", "10001"];
+          bitch['L'] = ["10000", "10000", "10000", "10000", "10000", "10000", "11111"];
+          bitch['M'] = ["10001", "11011", "10101", "10101", "10001", "10001", "10001"];
+          bitch['N'] = ["10001", "10001", "11001", "10101", "10011", "10001", "10001"];
+          bitch['O'] = ["01110", "10001", "10001", "10001", "10001", "10001", "01110"];
+          bitch['P'] = ["11110", "10001", "10001", "11110", "10000", "10000", "10000"];
+          bitch['Q'] = ["01110", "10001", "10001", "10001", "10101", "10010", "01101"];
+          bitch['R'] = ["11110", "10001", "10001", "11110", "10100", "10010", "10001"];
+          bitch['S'] = ["01110", "10001", "10000", "01110", "00001", "10001", "01110"];
+          bitch['T'] = ["11111", "00100", "00100", "00100", "00100", "00100", "00100"];
+          bitch['U'] = ["10001", "10001", "10001", "10001", "10001", "10001", "01110"];
+          bitch['V'] = ["10001", "10001", "10001", "10001", "01010", "01010", "00100"];
+          bitch['W'] = ["10001", "10001", "10001", "10101", "10101", "11011", "10001"];
+          bitch['X'] = ["10001", "10001", "01010", "00100", "01010", "10001", "10001"];
+          bitch['Y'] = ["10001", "10001", "10001", "01010", "00100", "00100", "00100"];
+          bitch['Z'] = ["11111", "00001", "00010", "00100", "01000", "10000", "11111"];
+          bitch['0'] = ["01110", "10001", "10011", "10101", "11001", "10001", "01110"];
+          bitch['1'] = ["00010", "01110", "00010", "00010", "00010", "00010", "00010"];
+          bitch['2'] = ["01110", "10001", "00001", "00110", "01000", "10000", "11111"];
+          bitch['3'] = ["01110", "10001", "00001", "00110", "00001", "10001", "01110"];
+          bitch['4'] = ["00010", "00110", "01010", "10010", "11111", "00010", "00010"];
+          bitch['5'] = ["11111", "10000", "11110", "00001", "00001", "10001", "01110"];
+          bitch['6'] = ["00110", "01000", "10000", "11110", "10001", "10001", "01110"];
+          bitch['7'] = ["11111", "00001", "00010", "00010", "00100", "00100", "00100"];
+          bitch['8'] = ["01110", "10001", "10001", "01110", "10001", "10001", "01110"];
+          bitch['9'] = ["01110", "10001", "10001", "01111", "00001", "00010", "01100"];
+          bitch["/"] = ["00001", "00001", "00010", "00100", "01000", "10000", "10000"];
+          bitch["\\"] = ["10000", "10000", "01000", "00100", "00010", "00001", "00001"];
+          bitch[":"] = ["00000", "01100", "01100", "00000", "01100", "01100", "00000"];
+          bitch["."] = ["00000", "00000", "00000", "00000", "00000", "01100", "01100"];
+          bitch[","] = ["00000", "00000", "00000", "00000", "00000", "01100", "00100"];
+          bitch[" "] = ["00000", "00000", "00000", "00000", "00000", "00000", "00000"];
+          bitch["("] = ["00010", "00100", "00100", "00100", "00100", "00100", "00010"];
+          bitch[")"] = ["01000", "00100", "00100", "00100", "00100", "00100", "01000"];
+          bitch["["] = ["00111", "00100", "00100", "00100", "00100", "00100", "00111"];
+          bitch["]"] = ["11100", "00100", "00100", "00100", "00100", "00100", "11100"];
+          bitch['<'] = ["00000", "00010", "00100", "01000", "00100", "00010", "00000"];
+          bitch['>'] = ["00000", "01000", "00100", "00010", "00100", "01000", "00000"];
+          bitch["-"] = ["00000", "00000", "00000", "11111", "00000", "00000", "00000"];
+          bitch["="] = ["00000", "00000", "11111", "00000", "11111", "00000", "00000"];
+          bitch["'"] = ["00110", "00110", "00010", "00000", "00000", "00000", "00000"];
+          bitch["`"] = ["01000", "00100", "00010", "00000", "00000", "00000", "00000"];
+          bitch['"'] = ["11011", "11011", "01001", "00000", "00000", "00000", "00000"];
+          scroll.bitch = bitch;
+        }());
+
+        scroll.enqueue = function(msg) {
+          // assume the index is the length - 1. Risky I know.
+          return scroll._messageQueue.push(msg) - 1;
+        };
+        scroll.dequeue = function(index) {
+          delete scroll._messageQueue[index];
+        }
+        scroll.clearQueue = function() {
+          scroll._messageQueue = [];
+        };
+
+
+        scroll.start = function() {
+          if (!scroll.intervalTimer) {
+            scroll.appendMessages();
+            scroll.intervalTimer = setInterval(scroll.run, 700); // e3 to turn into miliseconds
+          }
+        };
+        scroll.stop = function() {
+          if (scroll.intervalTimer) {
+            window.clearInterval(scroll.intervalTimer);
+            delete scroll.intervalTimer;
+          }
+        };
+
+        scroll.drawLetter = function(letter, xOffset) {
+          var offset = (typeof xOffset !== 'undefined') ? xOffset : 0,
+            i, j, v;
+          var obj = []
+          var arr = [];
+          for (i = -1; i < 7; i++) {
+            for (j = 0; j < 7; j++) {
+              if (offset + i >= 0 && offset + i < 7) {
+                if (scroll.bitch[letter]) {
+                  v = (scroll.bitch[letter][j].charAt(i) === '1') ? 'blanco' : 'negro';
+                  var h = j * 5 + (i + offset);
+                   console.log(h);
+                    //obj.elm.setAttribute('class', v);
+                    var blanco = "white"
+                    var negro = "black"
+                    if (v === 'blanco') {
+                      //console.log(j * i + v);
+                      mobilesock.to(mob[h]).emit('bg', blanco)
+                    } else {
+                      mobilesock.to(mob[h]).emit('bg', negro)
+                    }
+
+
+                  }
+                }
+              }
+            }
+          };
+
+          scroll.appendMessages = function() {
+            var messages = scroll._messageQueue.join(' .:. ');
+
+            if (messages.length) {
+              message = message.concat(messages.split(''));
+            } else {
+              scroll.stop();
+            }
+          };
+
+          scroll.addBlank = function() {
+            if (message.length < letterSpaces) {
+              message.push(' ');
+              emptyLetters++;
+
+              if (emptyLetters > letterSpaces) {
+                scroll.appendMessages();
+                emptyLetters = 0;
+              }
+            }
+          }
+
+          scroll.run = function() {
+            if (messageOffset === 7) {
+              messageOffset = 0;
+              message.shift();
+              scroll.addBlank();
+            }
+            var i, j;
+            for (i = -messageOffset, j = 0; i < scroll._cols; j++) {
+              scroll.drawLetter(message[j], i);
+              i = i + 7;
+            }
+            messageOffset = messageOffset + 1;
+          };
+
+          scroll.init = function(cols, rows) {
+            var i, j;
+
+            //scroll._body = document.getElementById(elm);
+            scroll._rows = rows;
+            scroll._cols = cols;
+
+            letterSpaces = Math.ceil(cols / 7);
+
+            // Fill all available spaces with blanks
+            message = new Array(letterSpaces + 1).join(' ').split('');
+            messageOffset = 0;
+            for (i = 0; i < rows; i++) {
+              led[i] = [];
+              for (j = 0; j < cols; j++) {
+                led[i][j] = {
+                  value: 'off',
+
+                }
+              }
+            }
+          };
+
+          return scroll;
+        }()); Scroller.init(5, 7); Scroller.enqueue(data); Scroller.start();
+
+    }
+    else {
+      displayMessage2(data)
+
+      function displayMessage2(data) {
+        var counter = 0;
+        var mob = [];
+        var msgIndex = -1;
+        var letter;
+        var letra;
+        var limit = 35;
+        var space;
+        for (pixelid = limit; pixelid > -1; pixelid--) {
+          var room = mobilesock.adapter.rooms[pixelid]
+          if (room) { //   ids moviles conectados
+            mob.push(pixelid);
+          }
+        }
+        (function myLoop(i) {
+          setTimeout(function() {
+
+            displayHandler = msgIndex;
+            displayHandler--;
+            msgIndex++;
+            if (msgIndex === (data.length + mob.length) - 1) {
+              panelsock.emit('finnished', true)
+              console.log("DONE")
+              displayHandler = null;
+              //  flag = true;
+            }
+            //  while (flag == false) {
+            for (var h = -1; h < mob.length; h++) {
+              letter = data[msgIndex - h];
+              if (letter in font) {
+                space = 1
+                letra = font[data[msgIndex - h]]
+                mobilesock.to(mob[h]).emit('pixels', letra)
+              } else {
+                space = 0
+                letter = ' '
+                letra = font[letter]
+                mobilesock.to(mob[h]).emit('pixels', letra)
+              }
+              panelsock.emit('pixels', font[data[msgIndex]]);
+
+              if (msgIndex === data.length) {
+                panelsock.emit('pixels', font[" "]);
+              }
+              //flag = true
+            }
+            //}
+            console.log(letter);
+            if (--i) myLoop(i); //  decrement i and call myLoop again if i > 0
+          }, 500)
+        })(data.length + mob.length);
+        console.log("TOTAL" + (data.length + (mob.length)))
+      }
+    }
+  }
+  http.listen(port, function() {
+    console.log('listening on ' + port)
+  })
