@@ -1,1 +1,3 @@
 theme: jekyll-theme-minimal
+timezone: UTC+2
+future: true
