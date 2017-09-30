@@ -1,0 +1,434 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>mobMess</title>
+<style type="text/css">
+#right-content br {
+	line-height: 5%;
+}
+body, html {
+	background-color: #FFF;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+.menu {
+	
+	font-size: 0.8vw;
+	background-color: #FFF;
+	font-family: Pixeled;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+	width: 20%;
+	height: 95%;
+	position: fixed;
+	top: 5%;
+	left: 1%;
+	word-wrap: break-word;
+}
+@font-face {
+	font-family: ConnectionSerif;
+	src: url(web/ConnectionSerif.otf);
+}
+@font-face {
+	font-family: Pixeled;
+	src: url(web/Pixeled.ttf);
+}
+	.title{
+		text-decoration: none;
+		color:blueviolet;
+		text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	}
+.refer {
+	font-family: Pixeled;
+	text-decoration: none;
+	color: #FFF;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+#mainText {
+	font-family: ConnectionSerif;
+	color: #FFF;
+	font-size: 1.2vw;
+}
+#center-content {
+	background-color: #FFF;
+	width: 50%;
+	height: 95%;
+	position: absolute;
+	top: 5%;
+	left: 20%;
+	overflow-wrap: break-word;
+	text-align: justify;
+	text-justify: inter-word;
+}
+	.input-group{
+	 width:50%;
+		display: block;
+	margin-left: auto;
+	margin-right: auto;
+	}
+#right-content {
+	background-color: #FFF;
+	width: 30%;
+	height: 95%;
+	position: absolute;
+	top: 5%;
+	left: 70%;
+}
+.sketch {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+}
+#invert {
+	background-color: #000;
+	width: 50%;
+	height: 25%;
+	top: 65%;
+	left: 20%;
+	position: fixed;
+	
+}
+
+
+	table.table-bordered > tbody > tr > td{
+    border:1px solid #BCBBBB;
+}
+	table{
+		font-family: ConnectionSerif;
+	color: #000;
+	
+	}
+	
+	#s1{background:none; z-index:0;}
+#s2{background:#FFF;  z-index:1;}
+	
+</style>
+<link href="web/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+<link href="web/bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+  <link href="web/style.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+<div id="left-content" class="menu">
+  <h1 id="title"><a class="title"
+  href="https://github.com/tocharomera/mobmess">mobMess</a></h1>
+  <h2><a class="refer" href="http://cargocollective.com/tocharomera/mobMess" style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black 0 -1px yellow; color:yellow ">CargoCollective</a></h2>
+  <h2><a class="refer" href="https://vimeo.com/235053964" style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px aqua; color:aqua">Vimeo</a></h2>
+</div>
+<!--NEXT AREA-->
+<div id="right-content" > <img class="sketch" src="web/MobMess007.jpg" > <br>
+  <img class="sketch" src="web/MobMess003.jpg" > <br>
+  <img class="sketch" src="web/MobMess004.jpg" > <br>
+  <img class="sketch" src="web/MobMess006.jpg" > <br>
+  <img class="sketch" src="web/MobMess005.jpg" > <br>
+  <img class="sketch" src="web/MobMess009.jpg" > <br>
+  <img class="sketch" src="web/MobMess008.jpg" > <br>
+  <img class="sketch" src="web/MobMess011.jpg" > </div>
+<div id="invert"></div>
+<!--NEXT AREA-->
+<div id="center-content" width="50%">
+ 
+  <iframe class="center" src="https://player.vimeo.com/video/235053964" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  <br>
+  <br>
+  <section id="s1">
+  <p id="mainText"> mobMess is a social interface project dedicated to reveal the capabilities of mobile technologies for participatory art.<br>
+    <br>
+    Random interactions on the streets of contemporary cities have been diminished by the increasing use of social networks, mail and communications via smart devices.<br>
+    <br>
+    The interactions made in the streets of contemporary cities have been diminished by the increasing use of communication via devices. The relationships that people establish are condensed in the communication through diverse profiles and representation of ourselves through web pages, blogs, etc. One could argue that we are only one small dot in the big picture of the internet and the world, but still we believe we are special and unique. The role of technology in our daily lives has an impact upon us which most of us do not know much about. At high speed, we are adapting to new interfaces, new languages and forms of communication and new digital realities.<br>
+    <br>
+    This project focuses on this specific void of reflection and understanding of the technologies which are around us and what we can use them for.<br>
+    <br>
+    A pixel is, in relation to the screen, what the individual is within a group. With this in mind, the concept behind Mob Mess is to create a collaborative communication tool. The interactive installation invites visitors who carry a mobile phone with them to participate.<br>
+    While most of the daily interaction with mobile phones can be considered as a form of isolation in front of a screen the installation aims to reverse this phenomena of self-absorption and flip-it.<br>
+    Flip-it in a very literal way. Each screen becomes part of a collective screen to show a text, a picture, or even a moving image.<br>
+    <br>
+    Thanks to new web protocols, users can connect through the browser to a server which replicates to all clients in a very fast and efficient way, almost in real time. This fast synchronization makes it possible to split up messages to many devices at once. The messages are encoded into binary code, using black and white instead of zero and one.<br>
+    The server assigns a number to each connected device and by this the users know how to arrange the phones. In other variations, it would be possible to make aspects of this interaction more playful.<br>
+    <br>
+    The purpose of this project is the re-identification of members which are present at the same time at the same location. Technology can make us detached from our surrounding but here it can connect us and create synergy.<br>
+    <br>
+    Through a simple interaction you can transform your smartphone screen into one pixel to synchronize with other participants and create a collective display. Gathering to render a message, showing synergy in a team effort and realizing about the cohabitants of the same time and space, a mirror of crowd individuals emerges.<br>
+    <br>
+    The aim to develop this project is to have a medium interface from which a concept can transform and scale up or down uncanny performances. Making a tool to reivindicate the power that underlays in technology, communication and art.<br>
+    <br>
+  </p>
+  
+  </section>
+
+  <section id="s2">
+  
+  <div class="phones row"></div>
+  <div class="row">
+    <div class="col-md-5"></div>
+    <div class="col-md-2">
+      <table class="table table-bordered table-responsive" id="tabla">
+        <tbody>
+          <tr>
+            <td id="c0">0</td>
+            <td id="c1">1</td>
+            <td id="c2">2</td>
+            <td id="c3">3</td>
+            <td id="c4">4</td>
+          </tr>
+          <tr>
+            <td id="c5">5</td>
+            <td id="c6">6</td>
+            <td id="c7">7</td>
+            <td id="c8">8</td>
+            <td id="c9">9</td>
+          </tr>
+          <tr>
+            <td id="c10">10</td>
+            <td id="c11">11</td>
+            <td id="c12">12</td>
+            <td id="c13">13</td>
+            <td id="c14">14</td>
+          </tr>
+          <tr>
+            <td id="c15">15</td>
+            <td id="c16">16</td>
+            <td id="c17">17</td>
+            <td id="c18">18</td>
+            <td id="c19">19</td>
+          </tr>
+          <tr>
+            <td id="c20">20</td>
+            <td id="c21">21</td>
+            <td id="c22">22</td>
+            <td id="c23">23</td>
+            <td id="c24">24</td>
+          </tr>
+          <tr>
+            <td id="c25">25</td>
+            <td id="c26">26</td>
+            <td id="c27">27</td>
+            <td id="c28">28</td>
+            <td id="c29">29</td>
+          </tr>
+          <tr>
+            <td id="c30">30</td>
+            <td id="c31">31</td>
+            <td id="c32">32</td>
+            <td id="c33">33</td>
+            <td id="c34">34</td>
+          </tr>
+        </tbody>
+      </table>
+      
+  </div>
+  
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    
+    <!-- /input-group --> 
+  </div>
+ 
+  <div class="col-md-6"> </div>
+</div> <div class="input-group" >
+      <input id="msginput" type="text" class="form-control " placeholder="message" value="hello world!">
+      <span class="input-group-btn">
+      <input class="btn btn-default" id="msgsend" type="button" value="Send"/>
+      <!--  <input class='btn btn-primary pull-right' type="submit" value="Submit" id='btnsubmit' />    --> 
+      </span></div>
+<div class="col-md-3"></div>
+</section>
+</div>
+<script src="web/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="web/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+	
+$(document).ready(init)
+var socket
+var cells
+$(window).scroll(function() {
+    var scrollYpos = $(document).scrollTop();
+        $(".sticky").css({
+            'top': scrollYpos,
+        });
+
+});
+var font = {
+  '1': [1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1],
+  '2': [1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+  '3': [1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+  '4': [1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0],
+  '5': [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+  '6': [1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+  '7': [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1],
+  '8': [1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+  '9': [1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+  '0': [1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+  ' ': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  'a': [1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+  'b': [0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+  'c': [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+  'd': [0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+  'e': [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+  'f': [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+  'g': [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+  'h': [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+  'i': [0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0],
+  'j': [0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1],
+  'k': [0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0],
+  'l': [0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+  'm': [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+  'n': [0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0],
+  'o': [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+  'p': [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+  'r': [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0],
+  's': [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+  't': [0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
+  'x': [0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0],
+  'v': [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1],
+  'u': [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+  'w': [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1],
+  'y': [0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1],
+  'z': [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+  '!': [1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+  '?': [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+
+
+}
+function init() {
+	$("#clear").click(function() {
+    var code = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+    displayBits(code)
+    $('#code').text("[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]")
+  });
+
+	cells = []
+  for (var i = 0; i < 35; i++) {
+    //select every cell
+    var cell = $('#c' + i)
+    cells.push(cell)
+  }
+
+	function pixels(code) {
+  
+    displayBits(code)
+  }
+	function finnished() {
+    console.log("finished");
+    $("#msgsend").removeAttr('disabled');
+    $('#msgsend').val("Send")
+
+  }
+	$('table.table td').click(function() {
+    $(this).toggleClass('selected')
+    var code = getUpdate()
+     displayBits(code)
+    
+  })
+	  $(document).keypress(function(e) {
+    var key = e.which;
+    if (key == 13) // the enter key code
+    {
+      $('#msgsend').trigger("click");
+    }
+  });
+  //message forme
+  $('#msgsend').click(function() {
+	  console.log("working");
+    $('#msgsend').val("Please Wait...")
+    $('#msgsend').attr('disabled', 'disabled');
+
+
+    var msg = $('#msginput').val()
+    $.get('/msg/' + msg)
+alter(msg+' ');
+  })
+  var displayHandler = null
+
+
+
+  function alter(data) {
+
+    console.log("alter:" + data);
+
+    
+   
+      displayMessage1(data)
+      console.log("shouldnt");
+
+      function displayMessage1(data) {
+        var counter = 0;
+        var mob = [];
+        var msgIndex = -1;
+        var letter;
+        var letra;
+        var limit = 50;
+        var space;
+      
+        (function myLoop(i) {
+          setTimeout(function() {
+            msgIndex++;
+            displayHandler = msgIndex;
+            displayHandler--;
+            if (msgIndex === (data.length) - 1) {
+              finnished();
+              console.log("DONE")
+              displayHandler = null;
+              //loop();
+              //flag = true;
+			}
+            letter = data[msgIndex]
+            if (letter in font) {
+              letra = font[data[msgIndex]]
+              //while (flag == false) {
+              
+              //}
+            }
+            pixels(font[data[msgIndex]]);
+            if (msgIndex === data.length) {
+              pixels( font[' ']);
+            }
+            if (--i) myLoop(i); //  decrement i and call myLoop again if i > 0
+          }, 500)
+        })(data.length);
+      
+      }
+    
+
+  }
+  
+
+	function getUpdate() {
+  var bits = [];
+  for (var i = 0; i < cells.length; i++) {
+    var cell = cells[i]
+    var bit = cell.hasClass('selected')
+    //http://stackoverflow.com/questions/7820683/convert-boolean-result-into-number-integer#7820695
+    bits.push(bit + false)
+
+  }
+
+  return bits
+}
+
+function displayBits(bits) {
+  var code = ''
+  for (var i = 0; i < bits.length; i++) {
+    var cell = cells[i]
+    var bit = bits[i]
+    if (bit) {
+      cell.addClass('selected')
+	  console.log("selected");
+    } else {
+      cell.removeClass('selected')
+    }
+  }
+  code = '[' + bits.join(',') + ']'
+  $('#code').text(code)
+}
+}
+</script>
+</body>
+</html>
