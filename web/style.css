@@ -19,6 +19,15 @@ body, html {
 	color:blueviolet;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+#fixedMenu{
+	position:fixed;
+	z-index: 1;
+	left:1%;
+	top: 3%;
+	padding-right:  1%;
+	width: 20%;
+	height: 30%;
+}
 	#title{
 		font-size: 2.5vw;
 		text-decoration-style: dotted;
@@ -29,15 +38,7 @@ body, html {
 #cargo {
 font-size: 1.3vw;
 }
-#fixedMenu{
-	position:fixed;
-	z-index: 1;
-	left:1%;
-	top: 3%;
-	padding-right:  1%;
-	width: 20%;
-	height: 30%;
-}
+
 .menu {
 	width: 20%;
 	height: 100%;
