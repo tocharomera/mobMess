@@ -199,8 +199,6 @@ mobilesock.on('connection', function(socket) {
   })
   /*socket.on('ok', function(ok) {
     confirm++
-
-
     if(confirm>=phones){
       flag = ok
       console.log(confirm+"ok");
@@ -441,4 +439,4 @@ function msgQueue(msg) {
   }
   http.listen(port, function() {
     console.log('listening on ' + port)
-  })
+})

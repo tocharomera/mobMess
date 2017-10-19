@@ -303,6 +303,46 @@ function isUndefined(arg) {
 }
 
 },{}],2:[function(require,module,exports){
+var Queue = require('buffered-queue');
+
+function msgQueue(msg) {
+  lastMessage = msg;
+
+  msg.length = msg.length || 1000;
+  var q = new Queue('msgBuffer', {
+    size: 1,
+    flushTimeout: 0,
+    verbose: false,
+    customResultFunction: function(items) {
+      var temp = [];
+      items.forEach(function(item, index, array) {
+
+        temp.push(item.toLowerCase());
+      });
+      return temp.join('\n');
+    }
+  });
+  if (displayHandler === null) {
+    console.log("NEW FLUSH")
+    q.on("flush", function(data, name) {
+      console.log(data);
+      alter(data);
+
+      setTimeout(function() {
+
+
+      }, (0));
+    });
+  }
+  q.add(msg);
+    /*setTimeout(lastMess, lastMessage.length * 100)
+     function lastMess(lastMessage){
+       if(lastMessage === msg){
+       msgQueue(lastMessage);}
+     }*/
+}
+
+},{"buffered-queue":3}],3:[function(require,module,exports){
 'use strict';
 
 var EventEmitter = require('events').EventEmitter;
