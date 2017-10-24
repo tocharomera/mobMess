@@ -20,16 +20,21 @@
   <div id="left-content" class="menu">
     <div id="fixedMenu">
       <h1 id="title" class="refer" style="color:white; text-decoration:line-through;text-decoration:line-through; text-decoration-color:black; text-decoration-style: dotted;"> mobMess</h1>
-      <div id="fixedMenu">
-        <h1 id="title" class="refer" style="color:white"> mobMess</h1></div>
-      <h1 id="title"><a class="refer" id="title"
+      <div id="fixedMenu1">
+        <h1 id="title1" class="refer" style="color:white"> mobMess</h1></div>
+      <h1 id="title2"><a class="refer" id="title3"
   href="https://github.com/tocharomera/mobmess">github</a></h1>
       <h2><a id="subMen" class="refer" href="https://vimeo.com/235053964" style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px aqua; color:aqua">Vimeo</a></h2>
       <h2><a id="cargo" class="refer" href="http://cargocollective.com/tocharomera/mobMess" style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black 0 -1px yellow; color:yellow ">CargoCollective</a></h2>
-
+	 <div class="input-group">
+        <input id="msginput" type="text" class="form-control " placeholder="message" value="hello world!">
+        <span class="input-group-btn">
+      <input class="btn btn-default" id="msgsend" type="button" value="Send"/>
+      <!--  <input class='btn btn-primary pull-right' type="submit" value="Submit" id='btnsubmit' />    -->
+      </span></div>
     </div>
     <div id="bgMenu">
-
+<!--
       <img class="sketch" src="web/MobMess007.jpg"> <br>
       <img class="sketch" src="web/MobMess003.jpg"> <br>
       <img class="sketch" src="web/MobMess004.jpg"> <br>
@@ -37,24 +42,9 @@
       <img class="sketch" src="web/MobMess005.jpg"> <br>
       <img class="sketch" src="web/MobMess009.jpg"> <br>
       <img class="sketch" src="web/MobMess008.jpg"> <br>
-
-    </div>
-  </div>
-  </div>
-  <!--NEXT AREA-->
-
-
-  <div id="invert"></div>
-  <!--NEXT AREA-->
-  <div id="center-content" width="80%">
-
-
-
-    <section id="s2">
-
-      <div class="phones row"></div>
-      <div class="row">
-        <div class="col-md-5"></div>
+-->
+   <div class="row">
+        
         <div class="col-md-2">
           <table class="table table-bordered table-responsive" id="tabla">
             <tbody>
@@ -111,28 +101,25 @@
           </table>
 
         </div>
-
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-
-          <!-- /input-group -->
-        </div>
-
-        <div class="col-md-6"> </div>
+        
       </div>
-      <div class="input-group">
-        <input id="msginput" type="text" class="form-control " placeholder="message" value="hello world!">
-        <span class="input-group-btn">
-      <input class="btn btn-default" id="msgsend" type="button" value="Send"/>
-      <!--  <input class='btn btn-primary pull-right' type="submit" value="Submit" id='btnsubmit' />    -->
-      </span></div>
-      <div class="col-md-3"></div>
-    </section>
+     
+    </div>
+    
+  </div>
+ 
+  <!--NEXT AREA-->
 
+
+  <!--NEXT AREA-->
+  <div id="invert"></div>
+<div id="center-content" width="80%">
+    <section id="s2"></section>
     <iframe id="video" src="https://player.vimeo.com/video/235053964" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ 
 
-
-    <section id="s1">
+   
+ <section id="s1">
       <br>
       <br>
       <p id="mainText"> mobMess is a social interface project dedicated to reveal the capabilities of mobile technologies for participatory art.<br>
@@ -153,12 +140,24 @@
         <br> The aim to develop this project is to have a medium interface from which a concept can transform and scale up or down uncanny performances. Making a tool to reivindicate the power that underlays in technology, communication and art.<br>
         <br>
       </p>
+		<br>
+      <br><br>
+      <br><br>
+      <br><br>
+      <br><br>
+      <br><br>
+      <br>
+<br>
+      <br>  </section>
+ &lt;br&gt;<br>
+&lt;br&gt;  </div>
 
-    </section>
-
-
-  </div>
-
+  
+<script>
+$(document).ready(function() {
+  msgQueue("hello world!");
+});
+</script>
 </body>
 
 </html>

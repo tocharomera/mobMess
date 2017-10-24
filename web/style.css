@@ -1,10 +1,6 @@
 
 body, html {
-	background-color: #FFF;
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
+	background-color: aliceblue;
 }
 
 @font-face {
@@ -28,7 +24,37 @@ body, html {
 	width: 20%;
 	height: 30%;
 }
+#fixedMenu1{
+	position:fixed;
+	z-index: 1;
+	left:1%;
+	top: 3%;
+	padding-right:  1%;
+	width: 20%;
+	height: 30%;
+}
 	#title{
+		font-size: 2.5vw;
+		text-decoration-style: dotted;
+		text-decoration: none;
+		color:blueviolet;
+		text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	}
+#title1{
+		font-size: 2.5vw;
+		text-decoration-style: dotted;
+		text-decoration: none;
+		color:blueviolet;
+		text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	}
+#title2{
+		font-size: 2.5vw;
+		text-decoration-style: dotted;
+		text-decoration: none;
+		color:blueviolet;
+		text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	}
+#title3{
 		font-size: 2.5vw;
 		text-decoration-style: dotted;
 		text-decoration: none;
@@ -55,8 +81,12 @@ font-size: 1.3vw;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 #bgMenu{
+	display: block;
+	left:2%;
+	width:15%;
 	top:40%;
-	position:absolute;
+	position:fixed;
+	
 }
 .sketch {
 	position: relative;
@@ -69,16 +99,14 @@ font-size: 1.3vw;
 
 #video{
 	box-shadow: 0 0 15px 15px #141414;
-	width:90%;
+	width:100%;
 	height:50%;
 	margin-top: 5%;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+	
+	
 }
 #center-content {
-
-	background-color: #FFF;
+	background-color: none;
 	width: 80%;
 	height: 100%;
 	position: absolute;
@@ -91,14 +119,14 @@ font-size: 1.3vw;
 }
 #mainText {
 	margin-right: 1%;
-	margin-right: 1%;
-margin-top: 5%;
+	
+	margin-top: 0%;
 	font-family: ConnectionSerif;
 	color: #FFF;
 	font-size: 1.5vw;
+	background-color: none;
 }
 #right-content {
-	background-color: #FFF;
 	width: 0%;
 	height: 95%;
 	position: absolute;
@@ -106,19 +134,21 @@ margin-top: 5%;
 	left: 70%;
 }
 #invert {
+	box-shadow: 0 0 14px 14px #141414;
 	background-color: #000;
-	width: 80%;
-	height: 25%;
-	top:75%;
-	left: 20%;
+	width: 100%;
+	height: 55%;
+	top:10%;
+	left: 20.2%;
 	position: fixed;
 }
 .input-group{
- width:50%;
+	position: fixed;
+ width:15%;
 height:50%;
-display:  inline-flex;
-margin-left:25%;
-margin-right: 25%;
+display:  block;
+margin-left:1%;
+top: 75%;
 }
 #right-content br {
 	line-height: 5%;
@@ -135,7 +165,7 @@ margin-right: 25%;
 	  color: white;
 	}
 	#s1{background:none; z-index:0;}
-#s2{background:#FFF;  z-index:1;}
+#s2{background:none;  z-index:1;}
 .starter-template {
   padding: 3rem 1.5rem;
   text-align: center;
@@ -164,3 +194,4 @@ table.table td.selected{
   background: black;
   color: white;
 }
+
