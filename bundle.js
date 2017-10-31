@@ -573,7 +573,7 @@
       }
 
       function finnished() {
-        console.log("finished");
+        
         $("#msgsend").removeAttr('disabled');
         $('#msgsend').val("Send")
 
@@ -594,7 +594,7 @@
       });
       //message forme
       $('#msgsend').click(function() {
-        console.log("working");
+        
         $('#msgsend').val("Please Wait...")
         $('#msgsend').attr('disabled', 'disabled');
 
@@ -633,9 +633,9 @@
           }
         });
         if (displayHandler === null) {
-          console.log("NEW FLUSH")
+          
           q.on("flush", function(data, name) {
-            console.log(data);
+        
             alter(data);
 
             setTimeout(function() {
@@ -653,7 +653,7 @@
       }
 
       function alter(data) {
-        console.log("alter:" + data);
+        
         displayMessage1(data)
 
 
@@ -673,7 +673,7 @@
               displayHandler--;
               if (msgIndex === (data.length) - 1) {
                 finnished();
-                console.log("DONE")
+             
                 displayHandler = null;
                 loop();
                 //flag = true;
@@ -719,7 +719,7 @@
           var bit = bits[i]
           if (bit) {
             cell.addClass('selected')
-            console.log("selected");
+            
           } else {
             cell.removeClass('selected')
           }
