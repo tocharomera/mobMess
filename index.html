@@ -26,7 +26,12 @@
 
 	  </div>
 
-	<!--
+	<div id="sketch">
+  		
+	  		<video class="sketch" autoplay loop src="web/Comp 1.mp4" type="video/mp4">
+	  	
+	  		</video>
+	  		
 		  <img class="sketch" src="web/MobMess007.jpg"> <br>
 		  <img class="sketch" src="web/MobMess003.jpg"> <br>
 		  <img class="sketch" src="web/MobMess004.jpg"> <br>
@@ -34,9 +39,23 @@
 		  <img class="sketch" src="web/MobMess005.jpg"> <br>
 		  <img class="sketch" src="web/MobMess009.jpg"> <br>
 		  <img class="sketch" src="web/MobMess008.jpg"> <br>
-	-->
-	   
-			  
+	
+	   </div>
+		<script>
+		var slideIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("sketch");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > x.length) {slideIndex = 1}
+    x[slideIndex-1].style.display = "block";
+    setTimeout(carousel, 2000); // Change image every 2 seconds
+}</script>  
 	  <!--NEXT AREA-->
 
 
@@ -44,8 +63,6 @@
 	<div id="center-content">
 		
 		<iframe src="https://player.vimeo.com/video/238389654?title=0&byline=0&portrait=0" id="video" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
-
 
 
 	 
