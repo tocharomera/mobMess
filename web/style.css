@@ -1,6 +1,6 @@
 
 body, html {
-	background-color: black;
+	background-color: white;
 }
 
 @font-face {
@@ -63,6 +63,7 @@ text-align:center;
 	
 }
 #video{
+	
 	width:80%;
 	height:50%;
 	display: block;
@@ -94,26 +95,27 @@ text-align:center;
 #mainText {
 	margin-right: 2%;
 	width:90%;
-	
+	background:white;
 	margin-top: 0%;
-	font-family: ConnectionSerif;
-	color: #FFF;
+	font-family: Consolas;
+	padding: 5px;
+	color: #373737;
 	font-size: 1.5vw;
 	background-color: none;
 }
 
 
 .input-group{
-	position: absolute;
- width:98%;
+	
+ width:30%;
 height:50%;
 display:  block;
-margin-left:1%;
-top: 90%;
+margin:auto +32%;
+
 }
 
 	table.table-bordered > tbody > tr > td{
-    border:1px solid  black;
+    border:30px solid  black;
 		
 }
  table-responsive{
@@ -123,7 +125,7 @@ top: 90%;
 	top:15%;
 	left:2%;
 	width:19%;
-	position: absolute;
+	
 	
 	margin: auto;
 }
@@ -147,7 +149,11 @@ top: 90%;
   margin: 0 20px;
 	
 }
-
+#schema{
+	width:20%;
+	height:20%;
+	
+}
 table.table td{
   text-align: center;
   cursor: default;
