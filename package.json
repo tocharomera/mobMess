@@ -1,0 +1,33 @@
+{
+  "name": "mobmess",
+  "version": "1.0.0",
+  "description": "mobmess a social interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tocharomera/mobMess.git"
+  },
+  "keywords": [
+    "art",
+    "smartphone",
+    "message",
+    "social"
+  ],
+  "author": "Mario Romera",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tocharomera/mobMess/issues"
+  },
+  "homepage": "https://github.com/tocharomera/mobMess#readme",
+  "dependencies": {
+    "buffered-queue": "^0.1.4",
+    "consolidate": "^0.15.1",
+    "express": "^4.16.3",
+    "nodemon": "^1.17.3",
+    "qr-image": "^3.2.0",
+    "socket.io": "^2.1.0"
+  }
+}
